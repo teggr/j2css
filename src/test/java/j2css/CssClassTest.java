@@ -32,4 +32,14 @@ class CssClassTest {
         CssClass cssClass = CssCreator.cssClass("card", CssCreator.style().padding("12px"));
         assertEquals("card", cssClass.getName());
     }
+
+    @Test
+    void shouldNotBeAffectedByOriginalStyleMutation() {
+        Style style = CssCreator.style().padding("10px");
+        CssClass cssClass = CssCreator.cssClass("card", style);
+
+        style.padding("20px");
+
+        assertTrue(cssClass.render().contains("padding: 10px;"));
+    }
 }

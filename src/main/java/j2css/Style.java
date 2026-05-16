@@ -7,6 +7,13 @@ import java.util.StringJoiner;
 public class Style {
     private final LinkedHashMap<String, String> properties = new LinkedHashMap<>();
 
+    public Style() {
+    }
+
+    private Style(Style other) {
+        properties.putAll(other.properties);
+    }
+
     public Style property(String name, String value) {
         properties.put(name, value);
         return this;
@@ -47,6 +54,10 @@ public class Style {
     public Style merge(Style other) {
         properties.putAll(other.properties);
         return this;
+    }
+
+    public Style copy() {
+        return new Style(this);
     }
 
     public String render() {

@@ -8,7 +8,7 @@ public class CssClass {
 
     public CssClass(String name, Style style) {
         this.name = name;
-        this.style = style;
+        this.style = style.copy();
     }
 
     public String getName() {
@@ -16,7 +16,7 @@ public class CssClass {
     }
 
     public CssClass extend(String newName, Style extension) {
-        Style merged = new Style().merge(style).merge(extension);
+        Style merged = style.copy().merge(extension);
         return new CssClass(newName, merged);
     }
 
